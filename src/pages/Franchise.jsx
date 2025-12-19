@@ -9,7 +9,8 @@ import {
     CheckCircle2,
     Store,
     UtensilsCrossed,
-    ArrowRight
+    ArrowRight,
+    AlertCircle
 } from 'lucide-react';
 
 const FranchisePage = () => {
@@ -22,7 +23,7 @@ const FranchisePage = () => {
         investment: '',
         message: ''
     });
-    const [submitted, setSubmitted] = useState(false);
+    const [status, setStatus] = useState(null); // null, 'submitting', 'success', 'error'
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,30 +36,41 @@ const FranchisePage = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setStatus('submitting');
 
-        // Construct mailto link
-        const subject = `Franchise Inquiry: ${formData.type} - ${formData.name}`;
-        const body = `Name: ${formData.name}%0D%0APhone: ${formData.phone}%0D%0AEmail: ${formData.email}%0D%0ACity: ${formData.city}%0D%0AFranchise Type: ${formData.type}%0D%0AInvestment Amount: ${formData.investment}%0D%0AMessage: ${formData.message}`;
+        // REPLACE THIS URL WITH YOUR OWN FORMSPREE ENDPOINT
+        // Example: https://formspree.io/f/xyzyjkln
+        const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID_HERE";
 
-        // Open email client
-        window.location.href = `mailto:customercare@dumwala.com?subject=${subject}&body=${body}`;
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
 
-        // Show success state and reset form
-        setSubmitted(true);
-        setFormData({
-            name: '',
-            phone: '',
-            email: '',
-            city: '',
-            type: 'Cloud Kitchen',
-            investment: '',
-            message: ''
-        });
-
-        // Reset success message after 5 seconds
-        setTimeout(() => setSubmitted(false), 5000);
+            if (response.ok) {
+                setStatus('success');
+                setFormData({
+                    name: '',
+                    phone: '',
+                    email: '',
+                    city: '',
+                    type: 'Cloud Kitchen',
+                    investment: '',
+                    message: ''
+                });
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setStatus('error');
+        }
     };
 
     return (
@@ -177,14 +189,22 @@ const FranchisePage = () => {
                                 <p className="text-gray-400">Fill out the details below and our team will get back to you within 24 hours.</p>
                             </div>
 
-                            {submitted ? (
+                            {status === 'success' ? (
                                 <div className="bg-green-500/10 border border-green-500/20 p-6 rounded-lg text-center animate-fade-in">
                                     <CheckCircle2 size={48} className="text-green-500 mx-auto mb-4" />
                                     <h3 className="text-xl font-bold text-white mb-2">Thank you!</h3>
                                     <p className="text-gray-300">Your inquiry has been received. We will contact you shortly.</p>
+                                    <button onClick={() => setStatus(null)} className="mt-4 text-sm text-green-500 hover:text-green-400 underline">Send another</button>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
+                                    {status === 'error' && (
+                                        <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-lg flex items-center gap-3 text-red-400 mb-6">
+                                            <AlertCircle size={20} />
+                                            <p className="text-sm">Something went wrong. Please try again or contact us directly on WhatsApp.</p>
+                                        </div>
+                                    )}
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Full Name *</label>
@@ -279,8 +299,17 @@ const FranchisePage = () => {
                                         ></textarea>
                                     </div>
 
-                                    <button type="submit" className="w-full bg-primary hover:bg-orange-700 text-white font-bold py-4 rounded-sm uppercase tracking-widest transition-colors shadow-lg shadow-primary/20">
-                                        Submit Inquiry
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'submitting'}
+                                        className="w-full bg-primary hover:bg-orange-700 text-white font-bold py-4 rounded-sm uppercase tracking-widest transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    >
+                                        {status === 'submitting' ? (
+                                            <>
+                                                <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin"></span>
+                                                Sending...
+                                            </>
+                                        ) : 'Submit Inquiry'}
                                     </button>
                                 </form>
                             )}
