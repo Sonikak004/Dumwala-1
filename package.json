@@ -1,0 +1,49 @@
+{
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.3.0"
+  },
+  "name": "dumwala-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "baseline-browser-mapping": "^2.9.10",
+    "browserslist": "^4.28.1",
+    "caniuse-lite": "^1.0.30001761",
+    "electron-to-chromium": "^1.5.267",
+    "escalade": "^3.2.0",
+    "fraction.js": "^5.3.4",
+    "lucide-react": "^0.562.0",
+    "nanoid": "^3.3.11",
+    "node-releases": "^2.0.27",
+    "picocolors": "^1.1.1",
+    "postcss-value-parser": "^4.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^7.11.0",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.2.3"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sonikak004/Dumwala-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sonikak004/Dumwala-1/issues"
+  },
+  "homepage": "https://github.com/Sonikak004/Dumwala-1#readme",
+  "description": ""
+}
