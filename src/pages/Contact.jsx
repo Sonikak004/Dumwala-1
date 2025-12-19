@@ -135,20 +135,7 @@ const Contact = () => {
                             </div>
 
                             {/* Embed Map Placeholder or Styled Block */}
-                            <div className="mt-8 h-48 w-full bg-white/5 rounded-sm overflow-hidden relative group/map">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <a
-                                        href="https://maps.google.com/?q=Dumwala+BTM+Layout"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full backdrop-blur-md text-sm font-bold transition-all transform group-hover/map:scale-105 flex items-center gap-2"
-                                    >
-                                        <MapPin size={16} /> View on Google Maps
-                                    </a>
-                                </div>
-                                {/* Simple dark pattern background for map placeholder */}
-                                <div className="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')] bg-cover bg-center mix-blend-overlay"></div>
-                            </div>
+
                         </div>
                     </div>
 

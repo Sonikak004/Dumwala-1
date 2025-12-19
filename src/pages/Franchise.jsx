@@ -19,7 +19,7 @@ const FranchisePage = () => {
         email: '',
         city: '',
         type: 'Cloud Kitchen',
-        investment: '10L - 15L',
+        investment: '',
         message: ''
     });
     const [submitted, setSubmitted] = useState(false);
@@ -28,11 +28,36 @@ const FranchisePage = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const scrollToForm = () => {
+        const formElement = document.getElementById('inquire');
+        if (formElement) {
+            formElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Franchise Inquiry:', formData);
+
+        // Construct mailto link
+        const subject = `Franchise Inquiry: ${formData.type} - ${formData.name}`;
+        const body = `Name: ${formData.name}%0D%0APhone: ${formData.phone}%0D%0AEmail: ${formData.email}%0D%0ACity: ${formData.city}%0D%0AFranchise Type: ${formData.type}%0D%0AInvestment Amount: ${formData.investment}%0D%0AMessage: ${formData.message}`;
+
+        // Open email client
+        window.location.href = `mailto:customercare@dumwala.com?subject=${subject}&body=${body}`;
+
+        // Show success state and reset form
         setSubmitted(true);
-        // Reset after 3 seconds for demo purposes
+        setFormData({
+            name: '',
+            phone: '',
+            email: '',
+            city: '',
+            type: 'Cloud Kitchen',
+            investment: '',
+            message: ''
+        });
+
+        // Reset success message after 5 seconds
         setTimeout(() => setSubmitted(false), 5000);
     };
 
@@ -63,9 +88,9 @@ const FranchisePage = () => {
                             We are on a mission to empower women homemakers and aspiring entrepreneurs.
                             Turn your passion for food into a profitable business with our flexible franchise models.
                         </p>
-                        <a href="#inquire" className="inline-flex items-center gap-2 bg-primary hover:bg-orange-700 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest transition-colors shadow-lg hover:shadow-primary/30">
+                        <button onClick={scrollToForm} className="inline-flex items-center gap-2 bg-primary hover:bg-orange-700 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest transition-colors shadow-lg hover:shadow-primary/30">
                             Inquire Now <ArrowRight size={20} />
-                        </a>
+                        </button>
                     </Reveal>
                 </div>
             </div>
@@ -117,7 +142,7 @@ const FranchisePage = () => {
                                 <li className="flex items-center gap-3 text-gray-400 text-sm"><CheckCircle2 size={16} className="text-primary" /> High Operational Efficiency</li>
                                 <li className="flex items-center gap-3 text-gray-400 text-sm"><CheckCircle2 size={16} className="text-primary" /> Tie-ups with Zomato/Swiggy</li>
                             </ul>
-                            <button className="w-full border border-white/20 text-white py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors font-bold">Learn More</button>
+                            <button onClick={scrollToForm} className="w-full border border-white/20 text-white py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors font-bold">Learn More</button>
                         </div>
                     </Reveal>
 
@@ -136,7 +161,7 @@ const FranchisePage = () => {
                                 <li className="flex items-center gap-3 text-gray-400 text-sm"><CheckCircle2 size={16} className="text-secondary" /> Utilizing Existing Assets</li>
                                 <li className="flex items-center gap-3 text-gray-400 text-sm"><CheckCircle2 size={16} className="text-secondary" /> Operational Overhaul</li>
                             </ul>
-                            <button className="w-full border border-white/20 text-white py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors font-bold">Learn More</button>
+                            <button onClick={scrollToForm} className="w-full border border-white/20 text-white py-3 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors font-bold">Learn More</button>
                         </div>
                     </Reveal>
                 </div>
@@ -229,18 +254,16 @@ const FranchisePage = () => {
                                             </select>
                                         </div>
                                         <div>
-                                            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Investment Range</label>
-                                            <select
+                                            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2 font-bold">Investment Amount</label>
+                                            <input
+                                                type="text"
                                                 name="investment"
+                                                required
                                                 value={formData.investment}
                                                 onChange={handleChange}
                                                 className="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:border-primary focus:outline-none transition-colors"
-                                            >
-                                                <option>5L - 10L</option>
-                                                <option>10L - 15L</option>
-                                                <option>15L - 25L</option>
-                                                <option>25L+</option>
-                                            </select>
+                                                placeholder="e.g. 15 Lakhs"
+                                            />
                                         </div>
                                     </div>
 
