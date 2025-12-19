@@ -42,7 +42,7 @@ const FranchisePage = () => {
 
         // REPLACE THIS URL WITH YOUR OWN FORMSPREE ENDPOINT
         // Example: https://formspree.io/f/xyzyjkln
-        const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID_HERE";
+        const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqezadkr";
 
         try {
             const response = await fetch(FORMSPREE_ENDPOINT, {
