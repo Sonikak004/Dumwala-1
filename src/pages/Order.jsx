@@ -116,7 +116,7 @@ const OrderPage = () => {
                     <h3 className="text-center text-white text-xl font-bold mb-8">Or Order via Our Partners</h3>
                     <div className="flex flex-wrap justify-center gap-6">
                         <a
-                            href="http://zoma.to/r/20000972"
+                            href="https://zomato.onelink.me/xqzv/8uk1pqcm"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-red-600/10 border border-red-600/30 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2"

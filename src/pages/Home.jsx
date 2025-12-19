@@ -28,7 +28,7 @@ const Home = () => {
         },
         "sameAs": [
             "https://www.instagram.com/dumwala",
-            "http://zoma.to/r/20000972",
+            "https://zomato.onelink.me/xqzv/8uk1pqcm",
             "https://www.swiggy.com/city/bangalore/dumwala-pappya-reddy-layout-btm-rest443363"
         ]
     };
@@ -51,7 +51,7 @@ const Home = () => {
                     <p className="text-secondary uppercase tracking-widest text-xs font-bold mb-6">Order via Partners</p>
                     <div className="flex flex-wrap justify-center gap-6">
                         <a
-                            href="http://zoma.to/r/20000972"
+                            href="https://zomato.onelink.me/xqzv/8uk1pqcm"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-red-600/10 border border-red-600/30 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
